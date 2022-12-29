@@ -5,8 +5,8 @@ from django.contrib import messages
 from integration.utils import paypal_token, ResponseInfo, return_response
 from rest_framework.generics import (ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView)
 
-token = "A21AAI6CwXgt5EneMJpV3EDzRAmW4grEHv6fYFeUUILtir8BjRXvUklAim-Y19qF9Lghr89b4uJMRudciZRecYRAU4MJB4Uzg"
-# token = paypal_token()
+
+token = paypal_token()
 
 headers = {
             'Content-Type': 'application/json',
@@ -97,10 +97,13 @@ class PlanListAPIView(ListAPIView):
         try:
             plan_url = URL + 'billing/plans'
             response = requests.get(plan_url, headers=headers)
+            list_response = response.json()
+            output_dict = [x for x in list_response["plans"] if x['status'] != 'INACTIVE']
             self.response_format = return_response(
-                response.json(), None, status.HTTP_200_OK, messages.SUCCESS)
+                output_dict, None, status.HTTP_200_OK, messages.success(request,'SUCCESS'))
             return Response(self.response_format)
         except Exception as e:
+            print(e)
             return Response(self.response_format)
 
 
