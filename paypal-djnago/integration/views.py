@@ -36,10 +36,10 @@ def paypal_cancel(request):
     messages.error(request, "You order has been cancelled.")
     return redirect('home')
 
-# token = paypal_token()
+token = paypal_token()
 headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ 'A21AAI6CwXgt5EneMJpV3EDzRAmW4grEHv6fYFeUUILtir8BjRXvUklAim-Y19qF9Lghr89b4uJMRudciZRecYRAU4MJB4Uzg',
+            'Authorization': 'Bearer '+token
         }
 URL = 'https://api-m.sandbox.paypal.com/v2/'
 
