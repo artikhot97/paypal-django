@@ -9,7 +9,7 @@ Yes we have sucessfully actiavte env then plesae import postman collection and p
 1. Create Profile on Paypal
 2. Go to the https://developer.paypal.com/
 3. Login or may be you direct see dashboard
-4. Click on Testing Tool from navbar and create SandBox account make sure that create 2 account one for Personal and other for Business please check out documentation for how to create Account
+4. Click on Testing Tool from navbar and create SandBox account make sure that create 2 account one for Personal and other for Business please check out documentation for how to create Account - https://docs.google.com/document/d/1GYXChgQ2BWOajy7fXAY6LY_GgpyB0qWDVD7esoOuif8/edit?usp=sharing
 5. Once created Create App
 5. If you created sucessfully APP then you will see Client and Client Secret ID's there that Keys you can use futhure
 
