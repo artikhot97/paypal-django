@@ -4,7 +4,8 @@ from .views import (PlanListAPIView,
                      UpdatePriceAPIView,CreateSubscriptionAPIView, UpdateSubscriptionAPIView,SubscriptionDetailAPIView,
                      ActivateSubscriptionAPIView,CancelsSubscriptionAPIView,AuthorizePaymentSubscriptionAPIView,
                      SuspendSubscriptionAPIView, SubscriptionTransactionsAPIView, ProductsListAPIView,
-                     CreateProductAPIView,UpdateProductAPIView , ProductDetailAPIView)
+                     CreateProductAPIView,UpdateProductAPIView , ProductDetailAPIView,CreateWebhookAPIView,UpdateSubscriptionWebhookAPIView,
+                    ListSubscriptionWebhookAPIView,)
 
 urlpatterns = [
     #Product
