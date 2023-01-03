@@ -4,29 +4,19 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-client_id = os.getenv('CLIENT_ID')
-client_secret = os.getenv('CLIENT_SECRET')
 
-print(client_id)
-print(client_secret)
-url = "https://api-m.sandbox.paypal.com/v1/oauth2/token"
-
-
-def paypal_token():
-    data = {
-                "client_id":client_id,
-                "client_secret":client_secret,
-                "grant_type":"client_credentials"
-            }
+def get_paypal_token():
+    client_id = os.getenv('CLIENT_ID')
+    client_secret = os.getenv('CLIENT_SECRET')
+    url = "https://api.sandbox.paypal.com/v1/oauth2/token"
+    payload = 'grant_type=client_credentials'
+    encoded_auth = base64.b64encode((client_id + ':' + client_secret).encode())
     headers = {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Authorization": "Basic {0}".format(base64.b64encode((client_id + ":" + client_secret).encode()).decode())
-            }
-
-    print(headers)
-    token = requests.post(url, data, headers=headers,  )
-    print(token, "token")
-    return token.json()['access_token']
+        'Authorization': f'Basic {encoded_auth.decode()}',
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    r = requests.request("POST", url, headers=headers, data=payload)
+    return r.json()["access_token"]
 
 
 class ResponseInfo(object):
