@@ -347,3 +347,76 @@ class SubscriptionTransactionsAPIView(CreateAPIView):
         self.response_format = return_response(
             response.json(), None, status.HTTP_200_OK, messages.SUCCESS)
         return Response(self.response_format)
+
+
+class CreateWebhookAPIView(CreateAPIView):
+    """
+    Subscribes your webhook listener to events.
+    """
+    authentication_classes = (JWTAuthentication, OAuth2Authentication)
+    permission_classes = (IsAuthenticated, IsTokenValid)
+    serializer_class = BrandListSerializer
+
+    def __init__(self, **kwargs):
+        self.response_format = ResponseInfo().response
+        super(CreateWebhookAPIView, self).__init__(**kwargs)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            webhook = URL+'v1/notifications/webhooks'
+            response = requests.post(webhook, headers=headers, json=request.data)
+            self.response_format = return_response(
+                response.json(), None, status.HTTP_200_OK, messages.SUCCESS)
+            return Response(self.response_format)
+        except Exception as e:
+            print(e, "error")
+            return Response(self.response_format)
+
+class UpdateSubscriptionWebhookAPIView(CreateAPIView):
+    """
+    Subscribes your webhook listener to events.
+    """
+    authentication_classes = ()
+    permission_classes = ()
+    serializer_class = BrandListSerializer
+
+    def __init__(self, **kwargs):
+        self.response_format = ResponseInfo().response
+        super(UpdateSubscriptionWebhookAPIView, self).__init__(**kwargs)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            event_json = json.loads(request.body)
+            
+            # you can do youre required operations
+
+            self.response_format = return_response(
+                event_json, None, status.HTTP_200_OK, messages.SUCCESS)
+            return Response(self.response_format)
+        except Exception as e:
+            print(e, "error")
+            return Response(self.response_format)
+
+class ListSubscriptionWebhookAPIView(ListAPIView):
+    """
+    Subscribes your webhook listener to events.
+    """
+    authentication_classes = ()
+    permission_classes = ()
+    serializer_class = BrandListSerializer
+
+    def __init__(self, **kwargs):
+        self.response_format = ResponseInfo().response
+        super(ListSubscriptionWebhookAPIView, self).__init__(**kwargs)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            webhook = URL + 'v1/notifications/webhooks'
+            response = requests.get(webhook, headers=headers)
+            self.response_format = return_response(
+                response.json(), None, status.HTTP_200_OK, messages.SUCCESS)
+            return Response(self.response_format)
+        except Exception as e:
+            print(e, "error")
+            return Response(self.response_format)
+
