@@ -29,4 +29,9 @@ urlpatterns = [
     url('authorizePaymentSubscription/(?P<subscription_id>.+)/', AuthorizePaymentSubscriptionAPIView.as_view(), name='authorize-payment-subscription'),
     url('suspendSubscription/(?P<subscription_id>.+)/', SuspendSubscriptionAPIView.as_view(), name='suspend-subscription-subscription'),
     url('listOfSubscriptionTransactions/(?P<subscription_id>.+)/', SubscriptionTransactionsAPIView.as_view(), name='suspend-subscription-subscription'),
+  
+    # Webhook
+    url('createWebhook', CreateWebhookAPIView.as_view(), name='create-webhook'),
+    url('updateSubscriptionWebhook', UpdateSubscriptionWebhookAPIView.as_view(), name='update-webhook'),
+    url('listSubscriptionWebhook', ListSubscriptionWebhookAPIView.as_view(), name='list-webhook'),
 ]
